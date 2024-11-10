@@ -1,0 +1,11 @@
+import requests
+
+# Get the encrypted flag
+result = requests.get('http://aes.cryptohack.org/block_cipher_starter/encrypt_flag')
+ciphertext = result.json()["ciphertext"]
+print("Ciphertext:", ciphertext)
+
+# Decrypt the ciphertext
+M = requests.get(f'http://aes.cryptohack.org/block_cipher_starter/decrypt/{ciphertext}')
+m = M.json()["plaintext"]
+print("Decrypted message:", bytes.fromhex(m))
